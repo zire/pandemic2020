@@ -1,7 +1,8 @@
-## Daily Trending of the Coronavirus Outbreak in Wuhan, China
+## 武汉疫情日报
+
+[网页地址](https://zire.github.io/pandemic2020/)
 
 这是根据人民日报发布的官方数据制作的每日趋势图
-
 
 
 ### 数据来源
