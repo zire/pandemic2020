@@ -67,6 +67,7 @@
 
 - Latest date as BOP (Beginning of Period): *`1/31/2020`*
 - Latest average day-over-day % of the last 3 trailing days: *`25.5%`*
+- Current life-to-date confirmed infected: *`11,791`*
 
 | # of Days from 1/31 | -20% Adj | -10% Adj | 0% Adj | 10% Adj | 20% Adj |
 | ---: |---: |---: |---: |---: |---:|
@@ -80,6 +81,7 @@
 
 - Latest date as BOP (Beginning of Period): *`1/31/2020`*
 - Latest average day-over-day % of the last 3 trailing days: *`25.2%`*
+- Current life-to-date deaths: *`259`*
 
 | # of Days from 1/31 | -20% Adj | -10% Adj | 0% Adj | 10% Adj | 20% Adj |
 | ---: |---: |---: |---: |---: |---:|
