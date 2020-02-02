@@ -16,15 +16,15 @@
 
 历史累计
 
-![chart](charts/pandemic_chart_YTD_all.png)
+![chart](charts/chart_big_4_ltd.png)
 
 每日新增
 
-![chart](charts/pandemic_chart_Net_New_all.png)
+![chart](charts/chart_big_4_net_new.png)
 
 历史累计 - 死亡和治愈
 
-![chart](charts/pandemic_chart_LTD_DnC.png)
+![chart](charts/chart_DnC_LTD.png)
 
 ## 统计数据
 
