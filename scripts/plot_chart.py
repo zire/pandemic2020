@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 df = pd.read_csv(
-	'../data/pandemic2020.csv',
+	'~/osmanthian/pandemic2020/data/pandemic2020.csv',
 	dtype={
 		'Close Contact': 'float',
 		'In Treatment': 'float',
@@ -50,7 +50,8 @@ plt.ylabel('累计人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=1))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 # plt.show()
-plt.savefig('../charts/chart_big_4_ltd.png')
+plt.savefig('~/osmanthian/pandemic2020/charts/chart_big_4_ltd.png')
+print('chart_big_4_ltd updated!')
 plt.close()
 
 # ------------ Plot Daily Net New Chart for the Big 4 -------------------------
@@ -67,7 +68,8 @@ plt.ylabel('新增人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=2))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
 # plt.show()
-plt.savefig('../charts/chart_big_4_net_new.png')
+plt.savefig('~/osmanthian/pandemic2020/charts/chart_big_4_net_new.png')
+print('chart_big_4_net_new updated!')
 plt.close()
 
 # ------------ Plot Life-to-Date for Death and Cured --------------------------
@@ -84,7 +86,10 @@ plt.ylabel('累计人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=3))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m%d'))
 # plt.show()
-plt.savefig('../charts/chart_DnC_LTD.png')
+plt.savefig('~/osmanthian/pandemic2020/charts/chart_DnC_LTD.png')
+print('chart_DnC_LTD updated!')
 plt.close()
+
+
 
 
