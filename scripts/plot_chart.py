@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from tabulate import tabulate
 
 df = pd.read_csv(
 	'../data/pandemic2020.csv',
@@ -20,13 +21,25 @@ df['日期'] = pd.to_datetime(df['日期'])
 # print(df)
 # print(df.dtypes)
 
-df['接触_新'] = df['接触'].diff()
-df['观察_新'] = df['观察'].diff()
-df['疑似_新'] = df['疑似'].diff()
-df['确诊_新'] = df['确诊'].diff()
-df['重症_新'] = df['重症'].diff()
-df['死亡_新'] = df['死亡'].diff()
-df['治愈_新'] = df['治愈'].diff()
+# Create new columns for daily incremental
+
+df['接触_新增量'] = df['接触'].diff()
+df['观察_新增量'] = df['观察'].diff()
+df['疑似_新增量'] = df['疑似'].diff()
+df['确诊_新增量'] = df['确诊'].diff()
+df['重症_新增量'] = df['重症'].diff()
+df['死亡_新增量'] = df['死亡'].diff()
+df['治愈_新增量'] = df['治愈'].diff()
+
+# Create new columns for daily change percentage
+
+df['接触_新增率'] = df['接触'].pct_change()
+df['观察_新增率'] = df['观察'].pct_change()
+df['疑似_新增率'] = df['疑似'].pct_change()
+df['确诊_新增率'] = df['确诊'].pct_change()
+df['重症_新增率'] = df['重症'].pct_change()
+df['死亡_新增率'] = df['死亡'].pct_change()
+df['治愈_新增率'] = df['治愈'].pct_change()
 
 # print(df)
 
@@ -58,7 +71,7 @@ plt.close()
 
 df.plot(
 	x='日期', 
-	y=['疑似_新', '确诊_新', '重症_新','死亡_新'],
+	y=['疑似_新增量', '确诊_新增量', '重症_新增量','死亡_新增量'],
 	style=['m', 'b', 'c', 'r'],
 	linewidth=3
 )
@@ -92,8 +105,21 @@ plt.close()
 
 # ----------- Create README.md ------------------------------------------------
 
-current_date = df['日期'].tail(1)
-# print(current_date)
+current_date = df['日期'].iat[-1]
+
+df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈']].iloc[::-1]
+
+ltd_table = tabulate(
+	df_ltd,
+	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
+	showindex = 'always',
+	tablefmt = 'pipe',
+	colalign = 'right',
+)
+
+print(ltd_table)
+
+# construct the text portion of the README.md file
 
 read_me_text = """
 # 2020年新型冠状病毒感染趋势图
@@ -102,8 +128,7 @@ read_me_text = """
 
 这是根据卫建委发布的官方数据制作的每日疫情发展趋势图。每日830~930之间根据卫建委发布的最新疫情通报更新。
 
-- current date is: %s
-- 更新时间: **`08:30, 2/3/2020`**
+- 更新时间: **`08:30, %s`**
 - [网页地址](https://zire.github.io/pandemic2020/)
 - [Github Repo地址](https://github.com/zire/pandemic2020)
 - 数据来源：[中华人民共和国国家卫生健康委员会卫生应急办公室](http://www.nhc.gov.cn/)
@@ -124,6 +149,14 @@ read_me_text = """
 历史累计 - 死亡和治愈
 
 ![chart](charts/chart_DnC_LTD.png)
+
+## 统计数据
+
+### 累计
+
+%s
+
+### 当日新增百分比
 
 ## 疫情蔓延时应该看什么电影
 
@@ -159,9 +192,11 @@ read_me_text = """
 - [1月21日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/930c021cdd1f46dc832fc27e0cc465c8.shtml)
 """
 
-read_me_all = read_me_text % current_date
+# Create complete README.md with variables
 
-md_file = "../test_README.md"
+read_me_all = read_me_text % (current_date.strftime('%Y-%m-%d'), ltd_table)
+
+md_file = "../test.md"
 
 with open(md_file, 'w') as f:
 	f.write(read_me_all)
