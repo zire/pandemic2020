@@ -4,13 +4,13 @@
 
 这是根据卫建委发布的官方数据制作的每日疫情发展趋势图。每日830~930之间根据卫建委发布的最新疫情通报更新。
 
-- 更新时间: **`08:53, 2/2/2020`**
+- 更新时间: **`08:30, 2/3/2020`**
 - [网页地址](https://zire.github.io/pandemic2020/)
 - [Github Repo地址](https://github.com/zire/pandemic2020)
 - 数据来源：[中华人民共和国国家卫生健康委员会卫生应急办公室](http://www.nhc.gov.cn/)
 - 数据范围: 全中国
 - 数据统计窗口：每日00 - 24小时
-- 死亡率 = 当日死亡人数/当日确诊人数
+- 死亡率 = 当日累计死亡人数/当日累计确诊人数
 
 ## 疫情趋势图
 
@@ -25,6 +25,8 @@
 历史累计 - 死亡和治愈
 
 ![chart](charts/chart_DnC_LTD.png)
+
+<!---
 
 ## 统计数据
 
@@ -111,13 +113,14 @@
 
 Source:
 - [Business Insider](https://www.businessinsider.com/wuhan-coronavirus-cases-total-sars-pandemic-cases-2020-1?r=US&IR=T)
+--->
 
 ## 疫情蔓延时应该看什么电影
 
 1. [Contagion (2011), IMDB 6.6, Matt Damon, Jude Law, Kate Winslet, Gwyneth Paltrow](https://www.imdb.com/title/tt1598778/). 这是跟目前的outbreak最接近的电影，几乎一模一样的情节。不要轻易跟厨师握手。
 2. [World War Z (2013), IMDB 7.0, Brad Pitt](https://www.imdb.com/title/tt0816711/). 找到疫情源头至关重要，哪怕牺牲再多的海军陆战队员也再所不惜。身上有点小病未必是坏事。
 3. [Outbreak (1995), IMDB 6.6, Dustin Hoffman, Rene Susso, Morgan Freeman, Kevin Bacon](https://www.imdb.com/title/tt0114069/). 论病毒的产生跟政府研究生化武器之间的关系。找到原始带菌者（电影里是一只猴子）是培育疫苗的关键。
-4. [Train to Fushan (2016), IMDB 7.5, Yoo Gong, Ma Dong-seok](https://www.imdb.com/title/tt5700672/). 在人群密集的地方如何保护自己，除了傍上马东锡这样的猛男以外
+4. [Train to Busan (2016), IMDB 7.5, Yoo Gong, Ma Dong-seok](https://www.imdb.com/title/tt5700672/). 在人群密集的地方如何保护自己，除了傍上马东锡这样的猛男以外
 5. [Zombieland (2009), IMDB 7.6, Emma Stone, Woody Harrelson, Jesse Eisenberg](https://www.imdb.com/title/tt1156398/). 在非常时期里非常实用的求生手册
 6. [Zombieland: Double Tap (2019), IMDB 6.8, Woody Harrelson, Jesse Eisenberg, Emma Stone](https://www.imdb.com/title/tt1560220/).在逃难时，四个人是比较合适的MDU (Minimum Deployment Unit）
 7. [The Mist (2007), IMDB 7.1, Thomas Jane](https://www.imdb.com/title/tt0884328/). 是待在原地还是外冲？
@@ -131,7 +134,9 @@ Source:
 
 ## 数据来源
 
-- [截至1月31日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqfkdt/202002/84faf71e096446fdb1ae44939ba5c528.shtml)
+- [截至2月2日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqfkdt/202002/24a796819bf747bd8b945384517e9a51.shtml)
+- [截至2月1日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/d5c495da742f4739b7f99339c3bd032f.shtml)
+- [截至1月31日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/84faf71e096446fdb1ae44939ba5c528.shtml)
 - [截至1月30日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a53e6df293cc4ff0b5a16ddf7b6b2b31.shtml)
 - [截至1月29日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/e71bd2e7a0824ca69f87bbf1bef2a3c9.shtml)
 - [截至1月28日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/1c259a68d81d40abb939a0781c1fe237.shtml)
