@@ -6,27 +6,27 @@ import matplotlib.dates as mdates
 df = pd.read_csv(
 	'../data/pandemic2020.csv',
 	dtype={
-		'Close Contact': 'float',
-		'In Treatment': 'float',
-		'Suspected Infection': 'float',
-		'Confirmed Infection': 'float',
-		'Severe Infection': 'float',
-		'Death': 'float',
-		'Cured': 'float'
+		'接触': 'float',
+		'观察': 'float',
+		'疑似': 'float',
+		'确诊': 'float',
+		'重症': 'float',
+		'死亡': 'float',
+		'治愈': 'float'
 		}
 	)
-df['Date'] = pd.to_datetime(df['Date'])
+df['日期'] = pd.to_datetime(df['日期'])
 
 # print(df)
 # print(df.dtypes)
 
-df['Close Contact New'] = df['Close Contact'].diff()
-df['In Treatment New'] = df['In Treatment'].diff()
-df['Suspected Infection New'] = df['Suspected Infection'].diff()
-df['Confirmed Infection New'] = df['Confirmed Infection'].diff()
-df['Severe Infection New'] = df['Severe Infection'].diff()
-df['Death New'] = df['Death'].diff()
-df['Cured New'] = df['Cured'].diff()
+df['接触_新'] = df['接触'].diff()
+df['观察_新'] = df['观察'].diff()
+df['疑似_新'] = df['疑似'].diff()
+df['确诊_新'] = df['确诊'].diff()
+df['重症_新'] = df['重症'].diff()
+df['死亡_新'] = df['死亡'].diff()
+df['治愈_新'] = df['治愈'].diff()
 
 # print(df)
 
@@ -39,8 +39,8 @@ plt.rcParams["font.family"]= "Heiti TC"
 # ------------ Plot Life-To-Date Chart for the Big 4 --------------------------
 
 fig = df.plot(
-	x='Date', 
-	y=['Suspected Infection', 'Confirmed Infection', 'Severe Infection','Death'],
+	x='日期', 
+	y=['疑似', '确诊', '重症','死亡'],
 	style=['m', 'b', 'c', 'r'],
 	linewidth=3
 )
@@ -57,8 +57,8 @@ plt.close()
 # ------------ Plot Daily Net New Chart for the Big 4 -------------------------
 
 df.plot(
-	x='Date', 
-	y=['Suspected Infection New', 'Confirmed Infection New', 'Severe Infection New','Death New'],
+	x='日期', 
+	y=['疑似_新', '确诊_新', '重症_新','死亡_新'],
 	style=['m', 'b', 'c', 'r'],
 	linewidth=3
 )
@@ -75,8 +75,8 @@ plt.close()
 # ------------ Plot Life-to-Date for Death and Cured --------------------------
 
 df.plot(
-	x='Date', 
-	y=['Death', 'Cured'],
+	x='日期', 
+	y=['死亡', '治愈'],
 	style=['r', 'g'],
 	linewidth=3
 )
