@@ -130,8 +130,7 @@ ltd_table = tabulate(
 	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
 	showindex = 'always',
 	tablefmt = 'pipe',
-	colalign = 'right',
-	numalign = 'right'
+	stralign = 'right'
 )
 
 # print(ltd_table)
@@ -154,7 +153,7 @@ change_table = tabulate(
 	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
 	showindex = 'always',
 	tablefmt = 'pipe',
-	colalign = 'right'
+	stralign = 'right'
 )
 
 # print(change_table)
