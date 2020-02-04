@@ -139,13 +139,13 @@ df_change = df[[
 	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率'
 	]].iloc[::-1]
 
-df_change['接触_新增率'] = df_change['接触_新增率'].map('{:,.2%}'.format)
-df_change['观察_新增率'] = df_change['观察_新增率'].map('{:,.2%}'.format)
-df_change['疑似_新增率'] = df_change['疑似_新增率'].map('{:,.2%}'.format)
-df_change['确诊_新增率'] = df_change['确诊_新增率'].map('{:,.2%}'.format)
-df_change['重症_新增率'] = df_change['重症_新增率'].map('{:,.2%}'.format)
-df_change['死亡_新增率'] = df_change['死亡_新增率'].map('{:,.2%}'.format)
-df_change['治愈_新增率'] = df_change['治愈_新增率'].map('{:,.2%}'.format)
+df_change['接触_新增率'] = df_change['接触_新增率'].map('{:,.1%}'.format)
+df_change['观察_新增率'] = df_change['观察_新增率'].map('{:,.1%}'.format)
+df_change['疑似_新增率'] = df_change['疑似_新增率'].map('{:,.1%}'.format)
+df_change['确诊_新增率'] = df_change['确诊_新增率'].map('{:,.1%}'.format)
+df_change['重症_新增率'] = df_change['重症_新增率'].map('{:,.1%}'.format)
+df_change['死亡_新增率'] = df_change['死亡_新增率'].map('{:,.1%}'.format)
+df_change['治愈_新增率'] = df_change['治愈_新增率'].map('{:,.1%}'.format)
 
 
 change_table = tabulate(
