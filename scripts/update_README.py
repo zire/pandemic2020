@@ -117,6 +117,7 @@ df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡
 
 # print(df_ltd['日期'].strftime('%m/%d'))
 
+df_ltd['日期'] = df_ltd['日期'].map('{:%m/%d}'.format)
 df_ltd['接触'] = df_ltd['接触'].map('{:,.0f}'.format)
 df_ltd['观察'] = df_ltd['观察'].map('{:,.0f}'.format)
 df_ltd['疑似'] = df_ltd['疑似'].map('{:,.0f}'.format)
@@ -139,6 +140,7 @@ df_change = df[[
 	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率'
 	]].iloc[::-1]
 
+df_change['日期'] = df_change['日期'].map('{:%m/%d}'.format)
 df_change['接触_新增率'] = df_change['接触_新增率'].map('{:,.1%}'.format)
 df_change['观察_新增率'] = df_change['观察_新增率'].map('{:,.1%}'.format)
 df_change['疑似_新增率'] = df_change['疑似_新增率'].map('{:,.1%}'.format)
