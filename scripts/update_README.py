@@ -1,11 +1,156 @@
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from tabulate import tabulate
 
+df = pd.read_csv(
+	'../data/pandemic2020.csv',
+	dtype={
+		'接触': 'float',
+		'观察': 'float',
+		'疑似': 'float',
+		'确诊': 'float',
+		'重症': 'float',
+		'死亡': 'float',
+		'治愈': 'float'
+		}
+	)
+df['日期'] = pd.to_datetime(df['日期'])
+
+# print(df)
+# print(df.dtypes)
+
+# Create new columns for daily incremental
+
+df['接触_新增量'] = df['接触'].diff()
+df['观察_新增量'] = df['观察'].diff()
+df['疑似_新增量'] = df['疑似'].diff()
+df['确诊_新增量'] = df['确诊'].diff()
+df['重症_新增量'] = df['重症'].diff()
+df['死亡_新增量'] = df['死亡'].diff()
+df['治愈_新增量'] = df['治愈'].diff()
+
+# Create new columns for daily change percentage
+
+df['接触_新增率'] = df['接触'].pct_change()
+df['观察_新增率'] = df['观察'].pct_change()
+df['疑似_新增率'] = df['疑似'].pct_change()
+df['确诊_新增率'] = df['确诊'].pct_change()
+df['重症_新增率'] = df['重症'].pct_change()
+df['死亡_新增率'] = df['死亡'].pct_change()
+df['治愈_新增率'] = df['治愈'].pct_change()
+
+# pd.options.display.float_format = '{:,}'.format
+
+# print(df)
+
+# print(df.dtypes)
+
+plt.rcParams["font.family"]= "Heiti TC"
+
+# m: magenta, b: blue, c: cyan, r: red
+
+# ------------ Plot Life-To-Date Chart for the Big 4 --------------------------
+
+fig = df.plot(
+	x='日期', 
+	y=['疑似', '确诊', '重症','死亡'],
+	style=['m', 'b', 'c', 'r'],
+	linewidth=3
+)
+plt.title('2020年新型冠状病毒感染趋势图 - 累计数据')
+plt.xlabel('日期')
+plt.ylabel('累计人数')
+# fig.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+# fig.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+# plt.show()
+plt.savefig('../charts/chart_big_4_ltd.png')
+print('chart_big_4_ltd updated!')
+plt.close()
+
+# ------------ Plot Daily Net New Chart for the Big 4 -------------------------
+
+df.plot(
+	x='日期', 
+	y=['疑似_新增量', '确诊_新增量', '重症_新增量','死亡_新增量'],
+	style=['m', 'b', 'c', 'r'],
+	linewidth=3
+)
+plt.title('2020年新型冠状病毒感染趋势图 - 每日新增')
+plt.xlabel('日期')
+plt.ylabel('新增人数')
+# fig.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+# fig.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
+# plt.show()
+plt.savefig('../charts/chart_big_4_net_new.png')
+print('chart_big_4_net_new updated!')
+plt.close()
+
+# ------------ Plot Life-to-Date for Death and Cured --------------------------
+
+df.plot(
+	x='日期', 
+	y=['死亡', '治愈'],
+	style=['r', 'g'],
+	linewidth=3
+)
+plt.title('2020年新型冠状病毒感染趋势图 - 死亡和治愈')
+plt.xlabel('日期')
+plt.ylabel('累计人数')
+# fig.xaxis.set_major_locator(mdates.DayLocator(interval=3))
+# fig.xaxis.set_major_formatter(mdates.DateFormatter('%m%d'))
+# plt.show()
+plt.savefig('../charts/chart_DnC_LTD.png')
+print('chart_DnC_LTD updated!')
+plt.close()
+
+# ----------- Create README.md ------------------------------------------------
+
+current_date = df['日期'].iat[-1]
+
+df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈']].iloc[::-1]
+
+# print(df_ltd['日期'])
+
+# df_ltd['日期'] = pd.to_datetime(df_ltd['日期'], format="%m/%d")
+
+# print(df_ltd['日期'].strftime('%m/%d'))
+
+ltd_table = tabulate(
+	df_ltd,
+	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
+	showindex = 'always',
+	tablefmt = 'pipe',
+	colalign = 'right'
+)
+
+# print(ltd_table)
+
+df_change = df[[
+	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率'
+	]].iloc[::-1]
+
+change_table = tabulate(
+	df_change,
+	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
+	showindex = 'always',
+	tablefmt = 'pipe',
+	colalign = 'right'
+)
+
+# print(change_table)
+
+# construct the text portion of the README.md file
+
+read_me_text = """
 # 2020年新型冠状病毒感染趋势图
 
 ## 说明
 
 这是根据卫建委发布的官方数据制作的每日疫情发展趋势图。每日830~930之间根据卫建委发布的最新疫情通报更新。
 
-- 更新时间: **`08:30, 2020-02-02`**
+- 更新时间: **`08:30, %s`**
 - [网页地址](https://zire.github.io/pandemic2020/)
 - [Github Repo地址](https://github.com/zire/pandemic2020)
 - 数据来源：[中华人民共和国国家卫生健康委员会卫生应急办公室](http://www.nhc.gov.cn/)
@@ -26,6 +171,16 @@
 历史累计 - 死亡和治愈
 
 ![chart](charts/chart_DnC_LTD.png)
+
+## 统计数据
+
+### 累计
+
+%s
+
+### 当日新增百分比
+
+%s
 
 ## 疫情蔓延时应该看什么电影
 
@@ -59,3 +214,19 @@
 - [1月23日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/5d19a4f6d3154b9fae328918ed2e3c8a.shtml)
 - [1月22日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a3c8b5144067417889d8760254b1a7ca.shtml)
 - [1月21日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/930c021cdd1f46dc832fc27e0cc465c8.shtml)
+"""
+
+# Create complete README.md with variables
+
+read_me_all = read_me_text % (current_date.strftime('%m-%d'), ltd_table, change_table)
+
+md_file = "../README.md"
+
+with open(md_file, 'w') as f:
+	f.write(read_me_all)
+	print("README.md updated!")
+
+
+
+
+
