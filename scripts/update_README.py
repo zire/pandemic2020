@@ -137,6 +137,31 @@ ltd_table = tabulate(
 
 # print(ltd_table)
 
+df_new = df[[
+	'日期', '接触_新增量', '观察_新增量', '疑似_新增量', '确诊_新增量', '重症_新增量', '死亡_新增量', '治愈_新增量'
+	]].iloc[::-1]
+
+df_new['日期'] = df_new['日期'].map('{:%m/%d}'.format)
+df_new['接触_新增量'] = df_new['接触_新增量'].map('{:,.0f}'.format)
+df_new['观察_新增量'] = df_new['观察_新增量'].map('{:,.0f}'.format)
+df_new['疑似_新增量'] = df_new['疑似_新增量'].map('{:,.0f}'.format)
+df_new['确诊_新增量'] = df_new['确诊_新增量'].map('{:,.0f}'.format)
+df_new['重症_新增量'] = df_new['重症_新增量'].map('{:,.0f}'.format)
+df_new['死亡_新增量'] = df_new['死亡_新增量'].map('{:,.0f}'.format)
+df_new['治愈_新增量'] = df_new['治愈_新增量'].map('{:,.0f}'.format)
+
+
+new_table = tabulate(
+	df_new,
+	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
+	showindex = 'always',
+	tablefmt = 'pipe',
+	stralign = 'right'
+)
+
+# print(ltd_table)
+
+
 df_change = df[[
 	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率'
 	]].iloc[::-1]
@@ -198,6 +223,10 @@ read_me_text = """
 
 %s
 
+### 当日新增
+
+%s
+
 ### 当日新增百分比
 
 %s
@@ -238,7 +267,7 @@ read_me_text = """
 
 # Create complete README.md with variables
 
-read_me_all = read_me_text % (current_date.strftime('%m-%d'), ltd_table, change_table)
+read_me_all = read_me_text % (current_date.strftime('%m-%d'), ltd_table, new_table, change_table)
 
 md_file = "../README.md"
 
