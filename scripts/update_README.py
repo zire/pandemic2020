@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from tabulate import tabulate
+from datetime import timedelta
 
 df = pd.read_csv(
 	'../data/pandemic2020.csv',
@@ -107,7 +108,7 @@ plt.close()
 
 # ----------- Create README.md ------------------------------------------------
 
-current_date = df['日期'].iat[-1]
+current_date = df['日期'].iat[-1] + timedelta(days=1)
 
 df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈']].iloc[::-1]
 
