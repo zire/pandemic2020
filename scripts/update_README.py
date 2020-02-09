@@ -110,7 +110,7 @@ plt.close()
 
 current_date = df['日期'].iat[-1] + timedelta(days=1)
 
-df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈']].iloc[::-1]
+df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈', 'Source']].iloc[::-1]
 
 # print(df_ltd['日期'])
 
@@ -119,6 +119,8 @@ df_ltd = df[['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡
 # print(df_ltd['日期'].strftime('%m/%d'))
 
 df_ltd['日期'] = df_ltd['日期'].map('{:%m/%d}'.format)
+df_ltd['日期'] = df_ltd[['日期','Source']].apply(lambda row: "<a href='%s'>%s</a>" % (row['Source'], row['日期']), axis=1)
+# df_ltd['日期'] = df_ltd['日期'].map('{:%m/%d}'.format)
 df_ltd['接触'] = df_ltd['接触'].map('{:,.0f}'.format)
 df_ltd['观察'] = df_ltd['观察'].map('{:,.0f}'.format)
 df_ltd['疑似'] = df_ltd['疑似'].map('{:,.0f}'.format)
@@ -128,7 +130,7 @@ df_ltd['死亡'] = df_ltd['死亡'].map('{:,.0f}'.format)
 df_ltd['治愈'] = df_ltd['治愈'].map('{:,.0f}'.format)
 
 ltd_table = tabulate(
-	df_ltd,
+	df_ltd.loc[:,df_ltd.columns != 'Source'],
 	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
 	showindex = 'always',
 	tablefmt = 'pipe',
@@ -138,10 +140,11 @@ ltd_table = tabulate(
 # print(ltd_table)
 
 df_new = df[[
-	'日期', '接触_新增量', '观察_新增量', '疑似_新增量', '确诊_新增量', '重症_新增量', '死亡_新增量', '治愈_新增量'
+	'日期', '接触_新增量', '观察_新增量', '疑似_新增量', '确诊_新增量', '重症_新增量', '死亡_新增量', '治愈_新增量', 'Source'
 	]].iloc[::-1]
 
 df_new['日期'] = df_new['日期'].map('{:%m/%d}'.format)
+df_new['日期'] = df_new[['日期','Source']].apply(lambda row: "<a href='%s'>%s</a>" % (row['Source'], row['日期']), axis=1)
 df_new['接触_新增量'] = df_new['接触_新增量'].map('{:,.0f}'.format)
 df_new['观察_新增量'] = df_new['观察_新增量'].map('{:,.0f}'.format)
 df_new['疑似_新增量'] = df_new['疑似_新增量'].map('{:,.0f}'.format)
@@ -152,7 +155,7 @@ df_new['治愈_新增量'] = df_new['治愈_新增量'].map('{:,.0f}'.format)
 
 
 new_table = tabulate(
-	df_new,
+	df_new.loc[:,df_new.columns != 'Source'],
 	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
 	showindex = 'always',
 	tablefmt = 'pipe',
@@ -163,10 +166,11 @@ new_table = tabulate(
 
 
 df_change = df[[
-	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率'
+	'日期', '接触_新增率', '观察_新增率', '疑似_新增率', '确诊_新增率', '重症_新增率', '死亡_新增率', '治愈_新增率', 'Source'
 	]].iloc[::-1]
 
 df_change['日期'] = df_change['日期'].map('{:%m/%d}'.format)
+df_change['日期'] = df_change[['日期','Source']].apply(lambda row: "<a href='%s'>%s</a>" % (row['Source'], row['日期']), axis=1)
 df_change['接触_新增率'] = df_change['接触_新增率'].map('{:,.1%}'.format)
 df_change['观察_新增率'] = df_change['观察_新增率'].map('{:,.1%}'.format)
 df_change['疑似_新增率'] = df_change['疑似_新增率'].map('{:,.1%}'.format)
@@ -177,7 +181,7 @@ df_change['治愈_新增率'] = df_change['治愈_新增率'].map('{:,.1%}'.form
 
 
 change_table = tabulate(
-	df_change,
+	df_change.loc[:,df_change.columns != 'Source'],
 	headers = ['日期', '接触', '观察', '疑似', '确诊', '重症', '死亡', '治愈'],
 	showindex = 'always',
 	tablefmt = 'pipe',
@@ -248,21 +252,7 @@ read_me_text = """
 13. [Twelven Monkeys (1995), IMDB 8.0, Bruce Willis, Brad Pitt, Madeleine Stowe](https://www.imdb.com/title/tt0114746/). 
 14. [Children of Men (2006), IMDB 7.9, Clive Owen, Julianne Moore, Chiwetel Ejiofor](https://www.imdb.com/title/tt0206634/).
 
-## 数据来源
 
-- [截至2月2日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqfkdt/202002/24a796819bf747bd8b945384517e9a51.shtml)
-- [截至2月1日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/d5c495da742f4739b7f99339c3bd032f.shtml)
-- [截至1月31日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/84faf71e096446fdb1ae44939ba5c528.shtml)
-- [截至1月30日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a53e6df293cc4ff0b5a16ddf7b6b2b31.shtml)
-- [截至1月29日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/e71bd2e7a0824ca69f87bbf1bef2a3c9.shtml)
-- [截至1月28日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/1c259a68d81d40abb939a0781c1fe237.shtml)
-- [截至1月27日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/ec9fe7ea987d467d9462e7db509079e6.shtml)
-- [截至1月26日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/3882fdcdbfdc4b4fa4e3a829b62d518e.shtml)
-- [截至1月25日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/9614b05a8cac4ffabac10c4502fe517c.shtml)
-- [截至1月24日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a7cf0437d1324aed9cc1b890b8ee29e6.shtml)
-- [1月23日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/5d19a4f6d3154b9fae328918ed2e3c8a.shtml)
-- [1月22日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a3c8b5144067417889d8760254b1a7ca.shtml)
-- [1月21日新型冠状病毒感染的肺炎疫情情况](http://www.nhc.gov.cn/xcs/yqtb/202001/930c021cdd1f46dc832fc27e0cc465c8.shtml)
 """
 
 # Create complete README.md with variables
