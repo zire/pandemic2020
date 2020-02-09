@@ -15,17 +15,17 @@
 
 ## 疫情趋势图
 
-历史累计
+疑似，确诊，重症，死亡，治愈 - 历史累计
 
-![chart](charts/chart_big_4_ltd.png)
+![chart](charts/chart_big_5_ltd.png)
 
-每日新增
+疑似，确诊 - 每日新增
 
-![chart](charts/chart_big_4_net_new.png)
+![chart](charts/chart_big_2_net_new.png)
 
-历史累计 - 死亡和治愈
+死亡，治愈 - 每日新增
 
-![chart](charts/chart_DnC_LTD.png)
+![chart](charts/chart_DnC_net_new.png)
 
 ## 统计数据
 
@@ -123,8 +123,7 @@
 
 ## 数据来源
 
-- [截至2月8日24时新型冠状病毒肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqfkdt/202002/4f28ab5ca87d42d284833df3ccc8d45a.shtml)
-- [截至2月2日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/24a796819bf747bd8b945384517e9a51.shtml)
+- [截至2月2日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqfkdt/202002/24a796819bf747bd8b945384517e9a51.shtml)
 - [截至2月1日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/d5c495da742f4739b7f99339c3bd032f.shtml)
 - [截至1月31日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202002/84faf71e096446fdb1ae44939ba5c528.shtml)
 - [截至1月30日24时新型冠状病毒感染的肺炎疫情最新情况](http://www.nhc.gov.cn/xcs/yqtb/202001/a53e6df293cc4ff0b5a16ddf7b6b2b31.shtml)

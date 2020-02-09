@@ -52,58 +52,58 @@ plt.rcParams["font.family"]= "Heiti TC"
 
 # m: magenta, b: blue, c: cyan, r: red
 
-# ------------ Plot Life-To-Date Chart for the Big 4 --------------------------
+# ------------ Plot Life-To-Date Chart for the Big 5 --------------------------
 
 fig = df.plot(
 	x='日期', 
-	y=['疑似', '确诊', '重症','死亡'],
-	style=['m', 'b', 'c', 'r'],
+	y=['疑似', '确诊', '重症','死亡', '治愈'],
+	style=['m', 'b', 'c', 'r', 'g'],
 	linewidth=3
 )
-plt.title('2020年新型冠状病毒感染趋势图 - 累计数据')
+plt.title('疑似，确诊，重症，死亡，治愈 - 累计数据')
 plt.xlabel('日期')
 plt.ylabel('累计人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=1))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 # plt.show()
-plt.savefig('../charts/chart_big_4_ltd.png')
-print('chart_big_4_ltd updated!')
+plt.savefig('../charts/chart_big_5_ltd.png')
+print('chart_big_5_ltd updated!')
 plt.close()
 
-# ------------ Plot Daily Net New Chart for the Big 4 -------------------------
+# ------------ Plot Daily Net New Chart for 疑似 and 确诊 -------------------------
 
 df.plot(
 	x='日期', 
-	y=['疑似_新增量', '确诊_新增量', '重症_新增量','死亡_新增量'],
-	style=['m', 'b', 'c', 'r'],
+	y=['疑似_新增量', '确诊_新增量'],
+	style=['m', 'b'],
 	linewidth=3
 )
-plt.title('2020年新型冠状病毒感染趋势图 - 每日新增')
+plt.title('疑似，确诊 - 每日新增')
 plt.xlabel('日期')
 plt.ylabel('新增人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=2))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
 # plt.show()
-plt.savefig('../charts/chart_big_4_net_new.png')
-print('chart_big_4_net_new updated!')
+plt.savefig('../charts/chart_big_2_net_new.png')
+print('chart_big_2_net_new updated!')
 plt.close()
 
-# ------------ Plot Life-to-Date for Death and Cured --------------------------
+# ------------ Plot Daily Net New for Death and Cured --------------------------
 
 df.plot(
 	x='日期', 
-	y=['死亡', '治愈'],
+	y=['死亡_新增量', '治愈_新增量'],
 	style=['r', 'g'],
 	linewidth=3
 )
-plt.title('2020年新型冠状病毒感染趋势图 - 死亡和治愈')
+plt.title('死亡，治愈 - 每日新增')
 plt.xlabel('日期')
-plt.ylabel('累计人数')
+plt.ylabel('新增人数')
 # fig.xaxis.set_major_locator(mdates.DayLocator(interval=3))
 # fig.xaxis.set_major_formatter(mdates.DateFormatter('%m%d'))
 # plt.show()
-plt.savefig('../charts/chart_DnC_LTD.png')
-print('chart_DnC_LTD updated!')
+plt.savefig('../charts/chart_DnC_net_new.png')
+print('chart_DnC_net_new updated!')
 plt.close()
 
 # ----------- Create README.md ------------------------------------------------
@@ -205,17 +205,17 @@ read_me_text = """
 
 ## 疫情趋势图
 
-历史累计
+疑似，确诊，重症，死亡，治愈 - 历史累计
 
-![chart](charts/chart_big_4_ltd.png)
+![chart](charts/chart_big_5_ltd.png)
 
-每日新增
+疑似，确诊 - 每日新增
 
-![chart](charts/chart_big_4_net_new.png)
+![chart](charts/chart_big_2_net_new.png)
 
-历史累计 - 死亡和治愈
+死亡，治愈 - 每日新增
 
-![chart](charts/chart_DnC_LTD.png)
+![chart](charts/chart_DnC_net_new.png)
 
 ## 统计数据
 
